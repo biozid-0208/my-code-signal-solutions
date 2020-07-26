@@ -1,6 +1,8 @@
-CREATE PROCEDURE suspectsInvestigation()
+CREATE PROCEDURE correctIPs()
 BEGIN
-    select id, name, surname
-    from Suspect
-    where name like 'b%' and surname rlike 'gre.n' and height <= 170;
+    SELECT id, ip
+    FROM ips
+    where ip REGEXP "(\\d{2}\\.\\d+)$|(\\.\\d{2})$"
+      and IS_IPV4(ip)
+    order by id;
 END
